@@ -1,0 +1,138 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+	background-color: #D3D3D3;
+	font-family: Candara;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.col-1 { min-width: 8.33%; }
+.col-2 { min-width: 16.67%; }
+.col-3 { min-width: 25%; }
+.col-4 { min-width: 33.33%; }
+.col-5 { min-width: 41.67%; }
+.col-6 { min-width: 50%; }
+.col-7 { min-width: 58.33%; }
+.col-8 { min-width: 66.67%; }
+.col-9 { min-width: 75%; }
+.col-10 { min-width: 83.33%; }
+.col-11 { min-width: 91.67%; }
+.col-12 { min-width: 100%; }
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones and tablets: */
+  [class*="col-"] {
+    width: 100%;
+  }
+}
+
+[class*="col-"] {
+  float: left;
+  padding: 15px;
+}
+
+.title {
+	margin: 20px auto 20px 8.33%;
+	font-weight: bold;
+}
+
+.container {
+	margin: auto 8.33% auto 8.33%;
+	padding: 20px auto 20px;
+	max-width: 83.33%;
+	border: 2px solid black;
+	background-color: white;
+}
+
+table {
+	vertical-align: middle;
+}
+
+th.name {
+	font-size: 22px;
+	vertical-align: middle;
+}
+
+td.author {
+	font-style: italic;
+	font-size: 20px;
+	vertical-align: middle;
+}
+
+td.action {
+	float: right;
+	vertical-align: middle;
+}
+
+h1 {
+	font-size: 36px;
+	padding: 10px;
+}
+
+label {
+	font-size: 20px;
+	padding-bottom: 10px;
+}
+
+input {
+	font-size: 20px;
+}
+
+.btn-secondary {
+	margin: 20px 8.33% 20px auto;
+	float: right;
+	font-size: 20px;
+	background-color: #404040
+}
+
+.form-control:focus {
+	border-color: #D3D3D3;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(64, 64, 64, 0.6);
+}
