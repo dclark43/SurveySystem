@@ -116,6 +116,11 @@ h1 {
 	padding: 10px;
 }
 
+h3 {
+	font-size: 20px;
+	padding: 10px;
+}
+
 label {
 	font-size: 20px;
 	padding-bottom: 10px;
@@ -156,7 +161,7 @@ input {
 }
 
 .removable {
-	width: 95%;
+	width: 90%;
 	display: inline;
 	margin-right: 10px;
 	vertical-align: middle;

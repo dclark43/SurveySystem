@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+        <meta name="author" content="David Clark and Evan West">
+        <meta name="description" content="Survey System">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="styles/main.css">
+
+        <title>View Results</title>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+            <a class="navbar-brand" href="index.html">Survey System</a> 
+        </nav>
+
+        <h1 class="title col-10">View Dog Survey Results</h1>
+
+        <div class="container col-10">
+            <h3>Which of these describes your opinion of dogs?</h3>
+            <div id="q1chart" style="height: 200px; width: 400px;"></div>
+
+            <h3>Do you have any dogs?</h3>
+            <div id="q2chart" style="height: 200px; width: 400px;"></div>
+
+            <h3>Do you prefer large dogs or small dogs?</h3>
+            <div id="q3chart" style="height: 200px; width: 400px;"></div>
+
+            <h3>Let's say you just got a new dog, what would you name it?</h3>
+            <div id="q4chart" style="height: 200px; width: 400px;"></div>
+
+        </div>
+
+        <!-- Library for graphing data from Google Charts, found at https://developers.google.com/chart/interactive/docs/gallery/barchart -->
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    </body>
+
+    <script>
+        // Modified code from google charts website
+        google.charts.load('current', {packages: ['corechart', 'bar']});
+        google.charts.setOnLoadCallback(drawQ1Chart);
+        google.charts.setOnLoadCallback(drawQ2Chart);
+        google.charts.setOnLoadCallback(drawQ3Chart);
+        google.charts.setOnLoadCallback(drawQ4Chart);
+
+        function drawQ1Chart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Question', 'People', { role: 'style' }],
+                ['I like dogs', 28, '#404040'],
+                ['I am neutral', 7, '#404040'],
+                ['I dislike dogs', 5, '#404040']
+            ]);
+            var options = {
+                chartArea: {width: '50%'},
+                legend: {position: 'none'},
+                hAxis: {
+                    minValue: 0
+                }
+            };
+            var q1chart = new google.visualization.BarChart(document.getElementById('q1chart'));
+            q1chart.draw(data, options);
+        }
+
+        function drawQ2Chart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Question', 'People', { role: 'style' }],
+                ['Yes', 18, '#404040'],
+                ['No', 22, '#404040'],
+            ]);
+            var options = {
+                chartArea: {width: '50%'},
+                legend: {position: 'none'},
+                hAxis: {
+                    minValue: 0
+                }
+            };
+            var q2chart = new google.visualization.BarChart(document.getElementById('q2chart'));
+            q2chart.draw(data, options);
+        }
+
+        function drawQ3Chart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Question', 'People', { role: 'style' }],
+                ['Small', 14, '#404040'],
+                ['Large', 26, '#404040'],
+            ]);
+            var options = {
+                chartArea: {width: '50%'},
+                legend: {position: 'none'},
+                hAxis: {
+                    minValue: 0
+                }
+            };
+            var q3chart = new google.visualization.BarChart(document.getElementById('q3chart'));
+            q3chart.draw(data, options);
+        }
+
+        function drawQ4Chart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Question', 'People', { role: 'style' }],
+                ['Bella', 3, '#404040'],
+                ['Charlie', 4, '#404040'],
+                ['Luna', 1, '#404040'],
+                ['Max', 2, '#404040'],
+                ['Lucy', 1, '#404040'],
+                ['Daisy', 1, '#404040'],
+                ['Cooper', 1, '#404040'],
+                ['Molly', 3, '#404040'],
+                ['Buddy', 4, '#404040'],
+                ['Stella', 1, '#404040'],
+                ['Tucker', 5, '#404040'],
+                ['Bentley', 3, '#404040'],
+                ['Maggie', 5, '#404040'],
+                ['Duke', 4, '#404040'],
+                ['Bear', 2, '#404040'],
+            ]);
+            var options = {
+                chartArea: {width: '50%'},
+                legend: {position: 'none'},
+                hAxis: {
+                    minValue: 0
+                }
+            };
+            var q4chart = new google.visualization.BarChart(document.getElementById('q4chart'));
+            q4chart.draw(data, options);
+        }
+    </script>
+
+</html>

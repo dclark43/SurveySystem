@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	
+		<meta name="author" content="David Clark and Evan West">
+		<meta name="description" content="Survey System">
+	
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="styles/main.css">
+		
+		<style> 
+			.questionList{
+			font-family: Candara;
+			}
+			
+			yesRadio:checked {
+				background-color: green;
+			}
+			
+			noRadio:checked {
+				background-color: red;
+			}
+		</style>
+		
+		<title>Take Survey</title>
+	</head>
+
+	<body>
+		<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    		<a class="navbar-brand" href="index.html">Survey System</a> 
+    	</nav>
+    	
+    	<h1 class="title col-10">Fill Out a Survey!</h1>
+    	
+    	<div class="surveyContainer col-10"> <!-- Meant to contain the survey in its entirety -->
+    		
+    		<h2 class="surveyHeader"><u>Dog Survey</u></h2> <!-- The survey title will eventually use user specified survey title   -->
+    		
+    		<div class="questionsContainer col-10"> <!-- Meant to contain the question list and input fields -->
+    			
+    			
+    			<form name="questionsForm" id="questionsForm" action="#" method="post">
+    				<ol class="questionList"> <!-- List size will eventually reflect # of questions users enter in their surveys -->
+    					<li>Which of these describes your opinion of dogs?</select></li>
+    					<select name="opinion">
+    						<option value="like">I like dogs!</option>
+    						<option value="neutral">I'm neutral.</option>
+    						<option value="dislike">I dislike dogs.</option>
+    					</select>
+    					<li>Do you have any dogs?</li>
+    						<input type="radio" class="yesRadio" name="hasDogs" value="Yes"> Yes
+    						<input type="radio" class="noRadio" name="hasDogs" value="No"> No
+    					<li>Do you prefer small dogs or large dogs?</li>
+    						<input type="radio" name="sizePreference" value="Small"> Small
+    						<input type="radio" name="sizePreference" value="Large"> Large
+    					<li>Let's say you just got a new dog. What would you name it? </li>
+    						Dog Name: <input type="text" name="dogName" id="dogName" />
+    				</ol>
+    				<button type="submit" class="btn btn-dark" id="submitAnswers" value="Submit Answers!">Submit Answers!</button>
+    			<div id="error"></div> <!-- Should display an error message if dogName variable is an incorrect format -->
+    			</form>
+    			
+    		</div>
+    		
+    	</div>
+    	
+    	
+
+	</body>
+	
+	<script>
+		var dogName = document.getElementById('dogName');
+		var questionsForm = document.getElementById('questionsForm');
+		var elementOfError = document.getElementById('error'); //Which error messages did the user activate?
+		
+		form.addEventListener('submit', (e) => { //Should check if any errors exist before allowing a submit to happen
+			var errorMessages = [];
+			if (dogName.value == null || dogName.value === '') { //Meant to ensure the textfield isn't empty when trying to submit
+				errorMessages.push('Name field cannot be empty');
+			}
+			
+			if (dogName.value.length > 15) {
+				errorMessages.push('Name cannot exceed 15 characters') //Meant to ensure text in the textfield isn't overly long 
+			}
+			
+			if (errorMessages.length > 0) { 
+				e.preventDefault(); //Prevent submitting if any input errors have occured
+				elementOfError.innerText = errorMessages.join(', ');
+			}
+		}
+	</script>
+</html>
