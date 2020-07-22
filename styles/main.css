@@ -136,3 +136,25 @@ input {
 	border-color: #D3D3D3;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(64, 64, 64, 0.6);
 }
+
+.answer {
+	margin: 10px 5% 10px 5%;
+}
+
+.dropdown-item {
+	padding: 10px;
+}
+
+.submit {
+	margin: 20px 3% 20px 30%;
+	vertical-align: middle;
+}
+
+.cancel {
+	margin: 20px 30% 20px 3%;
+	vertical-align: middle;
+}
+
+#addAnswer {
+	display: none;
+}

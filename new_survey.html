@@ -33,39 +33,47 @@
                     <input type="text" id="name" class="form-control" name="name"/>
                 </div>
 
-                <div class="form-group">
-                    <label for="question-1">Question 1</label>  
-                    <input type="text" id="question-1" class="form-control" />  
-                </div>
+                <div class="question">
 
-                <div class="form-group">
-                <label for="type">Answer Type</label>
-                <select id="type" class="form-control" >
-                    <option value="single" selected="selected" >Single Choice</option>
-                    <option value="multiple">Multiple Choice</option>
-                    <option value="number">Number Select</option>
-                    <option value="text">Text Entry</option>         
-                </select>
-                </div>
+                    <div class="form-group">
+                        <label for="question1">Question 1</label>  
+                        <input type="text" id="question1" class="form-control" />  
+                    </div>
 
-                <div class="form-group">
-                    <label for="answer-1">Answer 1</label>  
-                    <input type="text" id="answer-1" class="form-control" />  
-                </div>
+                    <div class="form-group dropdown answer">
+                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+                            Answer Type
+                        </button>
+                        <div class="dropdown-menu">
+                            <a id="single" class="dropdown-item" href="#" onclick="singleChoice();">Single Choice</a>
+                            <a id="multiple" class="dropdown-item" href="#" onclick="multipleChoice();">Multiple Choice</a>
+                            <a id="number" class="dropdown-item" href="#" onclick="numberSelect();">Number Select</a>
+                            <a id="text" class="dropdown-item" href="#" onclick="textEntry();">Text Entry</a>
+                        </div>
+                    </div>
 
-                <input type="button" class="btn btn-dark" id="add" value="+ Add Answer" onclick="addAnswer();"/> 
-                </br>
-                </br>
+                  <!--   <div class="form-group answer answer1">
+                        <label for="answer1">Answer 1</label>  
+                        <input type="text" id="answer1" class="form-control" />  
+                    </div> -->
+
+                    <br/>
+                    <input type="button" class="btn btn-dark answer" id="addAnswer" value="+ Add Answer" onclick="addAnswer();"/> 
+                    <br/>
+                    <br/>
+                </div>
                         
-                <input type="button" class="btn btn-dark" id="add" value="+ Add Question" onclick="addQuestion();"/> 
+                <input type="button" class="btn btn-dark" id="addQuestion" value="+ Add Question" onclick="addQuestion();"/> 
                 </form>
-
-            
-
         </div>
 
+        <a href="index.html" class="btn btn-dark submit col-2" onclick="validateForm();">Submit</a>
+        <a href="index.html" class="btn btn-light cancel col-2">Cancel</a>
 
-    </body>
+    <!-- Bootstrap js libraries required for dropdown menu -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 
     <script>
@@ -75,6 +83,41 @@
           nameInput.focus();
         }
 
+        function singleChoice() {
+            var menu = event.target.parentNode;
+            var dropdown = menu.parentNode;
+            var question = dropdown.parentNode;
+
+            var button = menu.previousElementSibling;
+            button.textContent = "Single Choice";
+        }
+
+        function multipleChoice() {
+            var menu = event.target.parentNode;
+            var dropdown = menu.parentNode;
+            var question = dropdown.parentNode;
+            
+            var button = menu.previousElementSibling;
+            button.textContent = "Multiple Choice";
+        }
+
+        function numberSelect() {
+            var menu = event.target.parentNode;
+            var dropdown = menu.parentNode;
+            var question = dropdown.parentNode;
+            
+            var button = menu.previousElementSibling;
+            button.textContent = "Number Select";
+        }
+
+        function textEntry() {
+            var menu = event.target.parentNode;
+            var dropdown = menu.parentNode;
+            var question = dropdown.parentNode;
+            
+            var button = menu.previousElementSibling;
+            button.textContent = "Text Entry";
+        }
 
         function addAnswer() {
 
@@ -82,7 +125,7 @@
 
 
         function removeAnswer() {
-            
+
         }
 
         function addQuestion() {
@@ -97,6 +140,8 @@
 
 
     </script>
+
+    </body>
 
 
 </html>
