@@ -24,8 +24,6 @@
 
         <div class="container col-10">
 
-
-
             <form name="mainform" >
     
                 <div class="form-group">
@@ -34,36 +32,26 @@
                 </div>
 
                 <div class="question">
-
                     <div class="form-group">
                         <label for="question1">Question 1</label>  
                         <input type="text" id="question1" class="form-control" />  
                     </div>
-
-                    <div class="form-group dropdown answer">
-                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-                            Answer Type
-                        </button>
-                        <div class="dropdown-menu">
-                            <a id="single" class="dropdown-item" href="#" onclick="singleChoice();">Single Choice</a>
-                            <a id="multiple" class="dropdown-item" href="#" onclick="multipleChoice();">Multiple Choice</a>
-                            <a id="number" class="dropdown-item" href="#" onclick="numberSelect();">Number Select</a>
-                            <a id="text" class="dropdown-item" href="#" onclick="textEntry();">Text Entry</a>
+                    <div class="answer">
+                        <div class="form-group dropdown">
+                            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+                                Answer Type
+                            </button>
+                            <div class="dropdown-menu">
+                                <a id="single" class="dropdown-item" href="#" onclick="singleChoice();">Single Choice</a>
+                                <a id="multiple" class="dropdown-item" href="#" onclick="multipleChoice();">Multiple Choice</a>
+                                <a id="number" class="dropdown-item" href="#" onclick="numberSelect();">Number Select</a>
+                                <a id="text" class="dropdown-item" href="#" onclick="textEntry();">Text Entry</a>
+                            </div>
                         </div>
                     </div>
-
-                  <!--   <div class="form-group answer answer1">
-                        <label for="answer1">Answer 1</label>  
-                        <input type="text" id="answer1" class="form-control" />  
-                    </div> -->
-
-                    <br/>
-                    <input type="button" class="btn btn-dark answer" id="addAnswer" value="+ Add Answer" onclick="addAnswer();"/> 
-                    <br/>
-                    <br/>
                 </div>
                         
-                <input type="button" class="btn btn-dark" id="addQuestion" value="+ Add Question" onclick="addQuestion();"/> 
+                    <input type="button" class="btn btn-dark" id="addQuestion" value="+ Add Question" onclick="addQuestion();"/> 
                 </form>
         </div>
 
@@ -86,53 +74,191 @@
         function singleChoice() {
             var menu = event.target.parentNode;
             var dropdown = menu.parentNode;
-            var question = dropdown.parentNode;
+            var answerDiv = dropdown.parentNode;
 
+            // Set button text
             var button = menu.previousElementSibling;
             button.textContent = "Single Choice";
+
+            // Don't add another "Add Answer" button if there is already one there
+            var inputElements = answerDiv.getElementsByTagName("input");
+            for(var i = 0; i < inputElements.length; i++) {
+                if(inputElements[i].value == "+ Add Answer") {
+                    return;
+                }
+            }
+
+            // Create and add "Add Answer" Button
+            var lineBreak = document.createElement("br");
+            answerDiv.appendChild(lineBreak);
+
+            var addAnswerButton = document.createElement("input");
+            addAnswerButton.type = "button"
+            addAnswerButton.className = "btn btn-dark"
+            addAnswerButton.value = "+ Add Answer"
+            addAnswerButton.addEventListener("click", addAnswer);
+            answerDiv.insertBefore(addAnswerButton, lineBreak);
+
+            // Don't add another answer field when selecting answer type
+            var labelElements = answerDiv.getElementsByTagName("label");
+            if(labelElements.length > 1) {
+                return;
+            }
+
+            // Create and add an answer text input field
+            var answerField = document.createElement("input");
+            answerField.type = "text";
+            answerField.className = "form-control";
+            answerField.id = "answer-" + (labelElements.length + 1);
+            var answerFieldDiv = document.createElement("div");
+            answerFieldDiv.className = "form-group";
+            var answerFieldLabel = document.createElement("label");
+            answerFieldLabel.for = answerField.id;
+            answerFieldLabel.textContent = "Answer " + (labelElements.length + 1);
+
+            answerDiv.insertBefore(answerFieldDiv, addAnswerButton);
+            answerFieldDiv.appendChild(answerFieldLabel);
+            answerFieldDiv.appendChild(answerField);
         }
 
         function multipleChoice() {
             var menu = event.target.parentNode;
             var dropdown = menu.parentNode;
-            var question = dropdown.parentNode;
+            var answerDiv = dropdown.parentNode;
             
+            // Set button text
             var button = menu.previousElementSibling;
             button.textContent = "Multiple Choice";
+
+            // Don't add another "Add Answer" button if there is already one there
+            var inputElements = answerDiv.getElementsByTagName("input");
+            for(var i = 0; i < inputElements.length; i++) {
+                if(inputElements[i].value == "+ Add Answer") {
+                    return;
+                }
+            }
+
+            // Create and add "Add Answer" Button
+            var lineBreak = document.createElement("br");
+            answerDiv.appendChild(lineBreak);
+
+            var addAnswerButton = document.createElement("input");
+            addAnswerButton.type = "button"
+            addAnswerButton.className = "btn btn-dark"
+            addAnswerButton.value = "+ Add Answer"
+            addAnswerButton.addEventListener("click", addAnswer);
+            answerDiv.insertBefore(addAnswerButton, lineBreak);
+
+            // Don't add another answer field when selecting answer type
+            var labelElements = answerDiv.getElementsByTagName("label");
+            if(labelElements.length > 1) {
+                return;
+            }
+
+            // Create and add an answer text input field
+            var answerField = document.createElement("input");
+            answerField.type = "text";
+            answerField.className = "form-control";
+            answerField.id = "answer-" + (labelElements.length + 1);
+            var answerFieldDiv = document.createElement("div");
+            answerFieldDiv.className = "form-group";
+            var answerFieldLabel = document.createElement("label");
+            answerFieldLabel.for = answerField.id;
+            answerFieldLabel.textContent = "Answer " + (labelElements.length + 1);
+
+            answerDiv.insertBefore(answerFieldDiv, addAnswerButton);
+            answerFieldDiv.appendChild(answerFieldLabel);
+            answerFieldDiv.appendChild(answerField);
         }
 
         function numberSelect() {
             var menu = event.target.parentNode;
             var dropdown = menu.parentNode;
-            var question = dropdown.parentNode;
+            var answerDiv = dropdown.parentNode;
             
+            // Set button text
             var button = menu.previousElementSibling;
             button.textContent = "Number Select";
+
+            // Clear any answers or buttons that might be there
+            var lineBreaks = answerDiv.getElementsByTagName("br");
+            for(var i = 0; i < lineBreaks.length; i++) {
+                lineBreaks[i].remove();
+            }
+
+            // Weird bug here where loop only removes every other element, temporary fix run loop 10 times
+            var labelElements = answerDiv.getElementsByTagName("label");
+            for(var j = 0; j < 10; j++) {
+                for(var i = 0; i < labelElements.length; i++) {
+                    labelElements[i].parentNode.remove();
+                }    
+            }
+
+            var inputElements = answerDiv.getElementsByTagName("input");
+            for(var i = 0; i < inputElements.length; i++) {
+                if(inputElements[i].value == "+ Add Answer") {
+                    inputElements[i].remove();
+                }
+            }
         }
 
         function textEntry() {
             var menu = event.target.parentNode;
             var dropdown = menu.parentNode;
-            var question = dropdown.parentNode;
+            var answerDiv = dropdown.parentNode;
             
+            // Set button text
             var button = menu.previousElementSibling;
             button.textContent = "Text Entry";
+
+            // Clear any answers or buttons that might be there
+            var lineBreaks = answerDiv.getElementsByTagName("br");
+            for(var i = 0; i < lineBreaks.length; i++) {
+                lineBreaks[i].remove();
+            }
+
+            // Weird bug here where loop only removes every other element, temporary fix run loop 10 times
+            var labelElements = answerDiv.getElementsByTagName("label");
+            for(var j = 0; j < 10; j++) {
+                for(var i = 0; i < labelElements.length; i++) {
+                    labelElements[i].parentNode.remove();
+                }    
+            }
+
+            var inputElements = answerDiv.getElementsByTagName("input");
+            for(var i = 0; i < inputElements.length; i++) {
+                if(inputElements[i].value == "+ Add Answer") {
+                    inputElements[i].remove();
+                }
+            }
         }
 
+        // Create and add an additional answer text input field
         function addAnswer() {
+            var answerDiv = event.target.parentNode;
+            var labelElements = answerDiv.getElementsByTagName("label");
+            var answerField = document.createElement("input");
+            answerField.type = "text";
+            answerField.className = "form-control";
+            answerField.id = "answer-" + (labelElements.length + 1);
+            var answerFieldDiv = document.createElement("div");
+            answerFieldDiv.className = "form-group";
+            var answerFieldLabel = document.createElement("label");
+            answerFieldLabel.for = answerField.id;
+            answerFieldLabel.textContent = "Answer " + (labelElements.length + 1);
 
-        }
-
-
-        function removeAnswer() {
-
+            answerDiv.insertBefore(answerFieldDiv, event.target);
+            answerFieldDiv.appendChild(answerFieldLabel);
+            answerFieldDiv.appendChild(answerField);
         }
 
         function addQuestion() {
-          
+            
         }
 
-
+        function removeAnswer() {
+            
+        }
 
         function removeQuestion() {
             
