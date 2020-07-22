@@ -239,8 +239,14 @@
             var labelElements = answerDiv.getElementsByTagName("label");
             var answerField = document.createElement("input");
             answerField.type = "text";
-            answerField.className = "form-control";
+            answerField.className = "form-control removable";
             answerField.id = "answer-" + (labelElements.length + 1);
+
+            var answerRemoveButton = document.createElement("button");
+            answerRemoveButton.className = "btn btn-dark remove-button";
+            answerRemoveButton.textContent = "X";
+            answerRemoveButton.addEventListener("click", removeAnswer);
+
             var answerFieldDiv = document.createElement("div");
             answerFieldDiv.className = "form-group";
             var answerFieldLabel = document.createElement("label");
@@ -250,6 +256,7 @@
             answerDiv.insertBefore(answerFieldDiv, event.target);
             answerFieldDiv.appendChild(answerFieldLabel);
             answerFieldDiv.appendChild(answerField);
+            answerFieldDiv.appendChild(answerRemoveButton);
         }
 
         function addQuestion() {
@@ -271,11 +278,16 @@
             questionNameDiv.className = "form-group";
             var questionNameInput = document.createElement("input");
             questionNameInput.type = "text";
-            questionNameInput.className = "form-control";
+            questionNameInput.className = "form-control removable";
+            var questionRemoveButton = document.createElement("button");
+            questionRemoveButton.className = "btn btn-dark remove-button";
+            questionRemoveButton.textContent = "X";
+            questionRemoveButton.addEventListener("click", removeQuestion);
             var questionNameLabel = document.createElement("label");
             questionNameLabel.textContent = "Question " + questionCount;
             questionNameDiv.appendChild(questionNameLabel);
             questionNameDiv.appendChild(questionNameInput);
+            questionNameDiv.appendChild(questionRemoveButton);
             questionDiv.appendChild(questionNameDiv);
 
 
@@ -327,11 +339,31 @@
         }
 
         function removeAnswer() {
-            
+            var answerParent = event.target.parentNode.parentNode;
+            var answerDiv = event.target.parentNode;
+            answerDiv.remove();
+
+            // Update answer numbers
+            var labelElements = answerParent.getElementsByTagName("label");
+            for(var i = 0; i < labelElements.length; i++) {
+                labelElements[i].textContent = "Answer " + (i + 1);
+            }
         }
 
         function removeQuestion() {
-            
+            var questionNameDiv = event.target.parentNode;
+            var questionDiv = questionNameDiv.parentNode;
+            questionDiv.remove();
+
+            // Update question numbers
+            var labelElements = $('form').find('label');
+            var questionNum = 1;
+            for(var i = 0; i < labelElements.length; i++) {
+                if(labelElements[i].parentNode.parentNode.className == "question") {
+                    labelElements[i].textContent = "Question " + questionNum;
+                    questionNum++;
+                }
+            }
         }
 
 

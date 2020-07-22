@@ -155,6 +155,15 @@ input {
 	vertical-align: middle;
 }
 
-/*#addAnswer {
-	display: none;
-}*/
+.removable {
+	width: 95%;
+	display: inline;
+	margin-right: 10px;
+	vertical-align: middle;
+}
+
+.remove-button {
+	width: 3%;
+	display: inline;
+	vertical-align: middle;
+}
