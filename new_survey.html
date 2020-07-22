@@ -51,7 +51,7 @@
                     </div>
                 </div>
                         
-                    <input type="button" class="btn btn-dark" id="addQuestion" value="+ Add Question" onclick="addQuestion();"/> 
+                    <input type="button" class="btn btn-dark" id="questionAdd" value="+ Add Question" onclick="addQuestion();"/> 
                 </form>
         </div>
 
@@ -253,7 +253,77 @@
         }
 
         function addQuestion() {
-            
+            var form = event.target.parentNode;
+            var questionDiv = document.createElement("div");
+            questionDiv.className = "question";
+            form.insertBefore(questionDiv, event.target);
+
+            var questionCount = 0;
+            // form is a Jquery object, cant use getElementsByTagName();
+            var questionElements = $('form').find('div');
+            for(var i = 0; i < questionElements.length; i++) {
+                if(questionElements[i].className == "question") {
+                    questionCount++;
+                }
+            }
+
+            var questionNameDiv = document.createElement("div");
+            questionNameDiv.className = "form-group";
+            var questionNameInput = document.createElement("input");
+            questionNameInput.type = "text";
+            questionNameInput.className = "form-control";
+            var questionNameLabel = document.createElement("label");
+            questionNameLabel.textContent = "Question " + questionCount;
+            questionNameDiv.appendChild(questionNameLabel);
+            questionNameDiv.appendChild(questionNameInput);
+            questionDiv.appendChild(questionNameDiv);
+
+
+            var answerDiv = document.createElement("div");
+            answerDiv.className = "answer";
+            questionDiv.appendChild(answerDiv);
+            dropdownDiv = document.createElement("div");
+            dropdownDiv.className = "form-group dropdown";
+            answerDiv.appendChild(dropdownDiv);
+            // Dropdown menu
+            var dropdownButton = document.createElement("button");
+            dropdownButton.className = "btn btn-light dropdown-toggle";
+            dropdownButton.type = "button";
+            dropdownButton.setAttribute("data-toggle", "dropdown");
+            dropdownButton.textContent = "Answer Type";
+            var menuDiv = document.createElement("div");
+            menuDiv.className = "dropdown-menu";
+            dropdownDiv.appendChild(dropdownButton);
+            dropdownDiv.appendChild(menuDiv);
+
+            var singleOption = document.createElement("a");
+            singleOption.className = "dropdown-item";
+            singleOption.href = "#";
+            singleOption.addEventListener("click", singleChoice);
+            singleOption.textContent = "Single Choice";
+
+            var multipleOption = document.createElement("a");
+            multipleOption.className = "dropdown-item";
+            multipleOption.href = "#";
+            multipleOption.addEventListener("click", multipleChoice);
+            multipleOption.textContent = "Multiple Choice";
+
+            var numberOption = document.createElement("a");
+            numberOption.className = "dropdown-item";
+            numberOption.href = "#";
+            numberOption.addEventListener("click", numberSelect);
+            numberOption.textContent = "Number Select";
+
+            var textOption = document.createElement("a");
+            textOption.className = "dropdown-item";
+            textOption.href = "#";
+            textOption.addEventListener("click", textEntry);
+            textOption.textContent = "Text Entry";
+
+            menuDiv.appendChild(singleOption);
+            menuDiv.appendChild(multipleOption);
+            menuDiv.appendChild(numberOption);
+            menuDiv.appendChild(textOption);
         }
 
         function removeAnswer() {
