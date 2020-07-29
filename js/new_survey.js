@@ -38,11 +38,21 @@ function singleChoice() {
         return;
     }
 
+    var questionCount = 0;
+    // form is a Jquery object, cant use getElementsByTagName();
+    var questionElements = $('form').find('div');
+    for(var i = 0; i < questionElements.length; i++) {
+        if(questionElements[i].className == "question") {
+            questionCount++;
+        }
+    }
+
     // Create and add an answer text input field
     var answerField = document.createElement("input");
     answerField.type = "text";
     answerField.className = "form-control";
     answerField.id = "answer-" + (labelElements.length + 1);
+    answerField.name = "answer-" + (questionCount) + "[]";
     var answerFieldDiv = document.createElement("div");
     answerFieldDiv.className = "form-group";
     var answerFieldLabel = document.createElement("label");
@@ -52,6 +62,10 @@ function singleChoice() {
     answerDiv.insertBefore(answerFieldDiv, addAnswerButton);
     answerFieldDiv.appendChild(answerFieldLabel);
     answerFieldDiv.appendChild(answerField);
+
+    // Set hidden type value for use in form
+    var hidden_type = menu.getElementsByTagName("input")[0];
+    hidden_type.value = "single";
 }
 
 function multipleChoice() {
@@ -88,11 +102,21 @@ function multipleChoice() {
         return;
     }
 
+    var questionCount = 0;
+    // form is a Jquery object, cant use getElementsByTagName();
+    var questionElements = $('form').find('div');
+    for(var i = 0; i < questionElements.length; i++) {
+        if(questionElements[i].className == "question") {
+            questionCount++;
+        }
+    }
+
     // Create and add an answer text input field
     var answerField = document.createElement("input");
     answerField.type = "text";
     answerField.className = "form-control";
     answerField.id = "answer-" + (labelElements.length + 1);
+    answerField.name = "answer-" + (questionCount) + "[]";
     var answerFieldDiv = document.createElement("div");
     answerFieldDiv.className = "form-group";
     var answerFieldLabel = document.createElement("label");
@@ -102,6 +126,10 @@ function multipleChoice() {
     answerDiv.insertBefore(answerFieldDiv, addAnswerButton);
     answerFieldDiv.appendChild(answerFieldLabel);
     answerFieldDiv.appendChild(answerField);
+
+    // Set hidden type value for use in form
+    var hidden_type = menu.getElementsByTagName("input")[0];
+    hidden_type.value = "multiple";
 }
 
 function numberSelect() {
@@ -133,6 +161,10 @@ function numberSelect() {
             inputElements[i].remove();
         }
     }
+
+    // Set hidden type value for use in form
+    var hidden_type = menu.getElementsByTagName("input")[0];
+    hidden_type.value = "number";
 }
 
 function textEntry() {
@@ -164,16 +196,23 @@ function textEntry() {
             inputElements[i].remove();
         }
     }
+
+    // Set hidden type value for use in form
+    var hidden_type = menu.getElementsByTagName("input")[0];
+    hidden_type.value = "text";
 }
 
 // Create and add an additional answer text input field
 function addAnswer() {
     var answerDiv = event.target.parentNode;
+    var questionLabelDiv = answerDiv.previousElementSibling;
     var labelElements = answerDiv.getElementsByTagName("label");
     var answerField = document.createElement("input");
     answerField.type = "text";
     answerField.className = "form-control removable";
     answerField.id = "answer-" + (labelElements.length + 1);
+    var questionNumber = questionLabelDiv.getElementsByTagName("label")[0].textContent.split(" ")[1];
+    answerField.name = "answer-" + questionNumber + "[]";
 
     var answerRemoveButton = document.createElement("button");
     answerRemoveButton.className = "btn btn-dark remove-button";
@@ -211,6 +250,7 @@ function addQuestion() {
     questionNameDiv.className = "form-group";
     var questionNameInput = document.createElement("input");
     questionNameInput.type = "text";
+    questionNameInput.name = "question[]"
     questionNameInput.className = "form-control removable";
     var questionRemoveButton = document.createElement("button");
     questionRemoveButton.className = "btn btn-dark remove-button";
@@ -265,10 +305,15 @@ function addQuestion() {
     textOption.addEventListener("click", textEntry);
     textOption.textContent = "Text Entry";
 
+    var hidden_type = document.createElement("input");
+    hidden_type.type = "hidden";
+    hidden_type.name = "type[]";
+
     menuDiv.appendChild(singleOption);
     menuDiv.appendChild(multipleOption);
     menuDiv.appendChild(numberOption);
     menuDiv.appendChild(textOption);
+    menuDiv.appendChild(hidden_type);
 }
 
 function removeAnswer() {

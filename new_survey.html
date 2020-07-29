@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1"> 
 
-        <meta name="author" content="David Clark and Evan West">
+        <meta name="author" content="David Clark">
         <meta name="description" content="Survey System">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
@@ -22,21 +22,23 @@
 
         <h1 class="title col-10">New Survey</h1>
 
-        <div class="container col-10">
+        <form name="create_survey" action="create_survey.php" method="post">
+            <div class="container col-10">
 
-            <form name="mainform" >
-    
                 <div class="form-group">
                     <label for="name">Survey Name</label>
                     <input type="text" id="name" class="form-control" name="name"/>
-                    <!-- <span class="error" id="name-note"></span> -->
+                </div>
+
+                <div class="form-group">
+                    <label for="author">Author (computing id)</label>
+                    <input type="text" id="author" class="form-control" name="author"/>
                 </div>
 
                 <div class="question">
                     <div class="form-group">
                         <label for="question1">Question 1</label>  
-                        <input type="text" id="question1" class="form-control" /> 
-                        <!-- <span class="error" id="question1-note"></span> -->
+                        <input type="text" id="question1" class="form-control" name="question[]" /> 
                     </div>
                     <div class="answer">
                         <div class="form-group dropdown">
@@ -48,16 +50,20 @@
                                 <a id="multiple" class="dropdown-item" href="#" onclick="multipleChoice();">Multiple Choice</a>
                                 <a id="number" class="dropdown-item" href="#" onclick="numberSelect();">Number Select</a>
                                 <a id="text" class="dropdown-item" href="#" onclick="textEntry();">Text Entry</a>
+                                <input type="hidden" name="type[]">
                             </div>
                         </div>
                     </div>
                 </div>
-                        
-                    <input type="button" class="btn btn-dark" id="questionAdd" value="+ Add Question" onclick="addQuestion();"/> 
-                </form>
-        </div>
 
-        <a href="index.html" class="btn btn-dark submit col-2" onclick="validateForm();">Submit</a>
+                <input type="button" class="btn btn-dark" id="questionAdd" value="+ Add Question" onclick="addQuestion();"/>
+            </div>
+                    
+            <input type="submit" class="btn btn-dark submit col-2" id="questionAdd" value="Submit"/>
+
+        </form>
+
+        <!-- <a href="index.html" class="btn btn-dark submit col-2" onclick="validateForm();">Submit</a> -->
         <a href="index.html" class="btn btn-light cancel col-2">Cancel</a>
 
     <!-- Bootstrap js libraries required for dropdown menu -->
