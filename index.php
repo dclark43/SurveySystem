@@ -1,3 +1,7 @@
+<?php
+	session_start(); #start the session
+	setcookie("user_id_cookie", $_SESSION['sessionID'], time() + (86400*30); //User Id currently expires after one month
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +10,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1"> 
 
-        <meta name="author" content="David Clark">
+        <meta name="author" content="David Clark and Evan West">
         <meta name="description" content="Survey System">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
@@ -16,6 +20,11 @@
     </head>
 
     <body>
+        <?php
+        	$survey_ids=array();
+        	$_SESSION['completed_surveys']=$survey_ids;
+		    ?>
+                
         <nav class="navbar navbar-expand-md bg-dark navbar-dark">
             <a class="navbar-brand" href="index.php">Survey System</a> 
         </nav>
@@ -66,5 +75,4 @@
         <a href="new_survey.html" class="btn btn-secondary col-2">Create Survey</a>
 
     </body>
-
 </html>

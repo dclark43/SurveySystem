@@ -1,3 +1,9 @@
+<?php
+	start_session();
+	$survey_names=array();
+	$_SESSION['completed_surveys']=$survey_ids;
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -5,7 +11,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	
-		<meta name="author" content="Evan West">
+		<meta name="author" content="Evan West and David Clark">
 		<meta name="description" content="Survey System">
 	
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
@@ -105,6 +111,9 @@
     		</div>
     		<input type="submit" class="btn btn-dark submit col-2" id="submit" value="Submit"/>
     		<a href="index.php" class="btn btn-light cancel col-2">Cancel</a>
+		<?php 
+			array_push($survey_names, $survey_name);
+		?>
     	</form>
     	
     	
@@ -133,3 +142,4 @@
 		}
 	</script>
 </html>
+

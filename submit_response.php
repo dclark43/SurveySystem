@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require('connect-db.php');
 global $db;
@@ -90,6 +91,5 @@ function addResponse($question_id, $answer_id, $number, $text) {
 	
 	$statement->closeCursor();
 }
-
 
 ?>
