@@ -92,5 +92,4 @@ function addResponse($question_id, $answer_id, $number, $text) {
 	$statement->closeCursor();
 }
 
-
 ?>

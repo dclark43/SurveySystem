@@ -2,7 +2,6 @@
 	session_start(); #start the session
 	setcookie("user_id_cookie", $_SESSION['sessionID'], time() + (86400*30); //User Id currently expires after one month
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,11 +20,10 @@
     </head>
 
     <body>
-        
         <?php
         	$survey_ids=array();
         	$_SESSION['completed_surveys']=$survey_ids;
-		?>
+		    ?>
                 
         <nav class="navbar navbar-expand-md bg-dark navbar-dark">
             <a class="navbar-brand" href="index.php">Survey System</a> 
@@ -77,5 +75,4 @@
         <a href="new_survey.html" class="btn btn-secondary col-2">Create Survey</a>
 
     </body>
-
 </html>

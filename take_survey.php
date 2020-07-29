@@ -4,7 +4,6 @@
 	$_SESSION['completed_surveys']=$survey_ids;
 ?>
 
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -143,3 +142,4 @@
 		}
 	</script>
 </html>
+
