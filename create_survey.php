@@ -32,7 +32,7 @@ if($valid_form[0] == "true") {
 		}
 	}
 
-	header("Location: index.html");
+	header("Location: index.php");
 }
 else {
 	// Show javascript alert and automatically reload new_survey form when alert is clicked
@@ -53,7 +53,6 @@ function addSurvey($name, $author) {
 	
 	$statement->closeCursor();
 	return $db->lastInsertId();
-	// header('Location: index.html');
 }
 
 
