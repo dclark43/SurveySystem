@@ -1,5 +1,6 @@
 <?php
 	session_start(); #start the session
+	setcookie("user_id_cookie", $_SESSION['sessionID'], time() + (86400*30); //User Id currently expires after one month
 ?>
 
 <!DOCTYPE html>
