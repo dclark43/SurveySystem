@@ -1,5 +1,7 @@
 <?php
 	start_session();
+	$survey_names=array();
+	$_SESSION['completed_surveys']=$survey_ids;
 ?>
 
 
@@ -110,6 +112,9 @@
     		</div>
     		<input type="submit" class="btn btn-dark submit col-2" id="submit" value="Submit"/>
     		<a href="index.php" class="btn btn-light cancel col-2">Cancel</a>
+		<?php 
+			array_push($survey_names, $survey_name);
+		?>
     	</form>
     	
     	
