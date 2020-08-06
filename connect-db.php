@@ -1,5 +1,4 @@
 <?php
-   session_start();
 // To find a hostname, access phpMyAdmin
 // - select tob "User accounts"
 // - locate the username you created, by default, the Host name is localhost

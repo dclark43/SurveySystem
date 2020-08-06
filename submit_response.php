@@ -1,5 +1,7 @@
 <?php
-session_start();
+if(!isset($_SESSION)) {
+	session_start();
+}
 
 require('connect-db.php');
 global $db;
@@ -7,6 +9,10 @@ global $db;
 $valid_form = formValid($_POST);
 
 if($valid_form[0] == "true") {
+	// Add the survey id to the session variable 'completed_surveys'
+	$survey_id = $_POST['survey_id'];
+	array_push($_SESSION['completed_surveys'], $survey_id);
+
 	foreach($_POST as $index => $value) {
 		// Split the name of the input field at "-" into an array
 		$split_name = explode("-", $index);

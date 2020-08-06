@@ -1,4 +1,7 @@
 <?php
+if(!isset($_SESSION)) {
+	session_start();
+}
 
 require('connect-db.php');
 
@@ -7,6 +10,10 @@ $valid_form = formValid($_POST);
 if($valid_form[0] == "true") {
 	// Add name and author to survey table
 	$survey_id = addSurvey($_POST['name'], $_POST['author']);
+
+	// Add survey id to session array holding created surveys
+	array_push($_SESSION['created_surveys'], $survey_id);
+
 	$question_ids = array();
 
 	// Loop through questions and add each to questions table

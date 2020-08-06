@@ -1,7 +1,7 @@
 <?php
-	start_session();
-	$survey_names=array();
-	$_SESSION['completed_surveys']=$survey_ids;
+if(!isset($_SESSION)) {
+	session_start();
+}
 ?>
 
 <!DOCTYPE html>
@@ -109,11 +109,12 @@
                     <?php endforeach; ?>
     			</div>
     		</div>
-    		<input type="submit" class="btn btn-dark submit col-2" id="submit" value="Submit"/>
+
+    		<!-- hidden input to carry over survey_id -->
+    		<input type="hidden" id="survey_id" name="survey_id" value="<?php echo $_GET['survey_id']; ?>">
+
+    		<input type="submit" class="btn btn-dark submit col-2" id="submit" value="Submit">
     		<a href="index.php" class="btn btn-light cancel col-2">Cancel</a>
-		<?php 
-			array_push($survey_names, $survey_name);
-		?>
     	</form>
     	
     	

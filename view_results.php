@@ -1,5 +1,7 @@
 <?php
-	start_session();
+if(!isset($_SESSION)) {
+    session_start();
+}
 ?>
 
 <!DOCTYPE html>

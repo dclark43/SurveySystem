@@ -1,6 +1,8 @@
 <?php
-	session_start(); #start the session
-	setcookie("user_id_cookie", $_SESSION['sessionID'], time() + (86400*30); //User Id currently expires after one month
+	if(!isset($_SESSION)) {
+        session_start();
+    }
+	setcookie("user_id_cookie", session_id(), time() + (86400*30)); //User Id currently expires after one month
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,9 +23,13 @@
 
     <body>
         <?php
-        	$survey_ids=array();
-        	$_SESSION['completed_surveys']=$survey_ids;
-		    ?>
+            if(!isset($_SESSION['completed_surveys'])) {
+                $_SESSION['completed_surveys']=array();
+            }
+            if(!isset($_SESSION['created_surveys'])) {
+                $_SESSION['created_surveys']=array();
+            }
+		?>
                 
         <nav class="navbar navbar-expand-md bg-dark navbar-dark">
             <a class="navbar-brand" href="index.php">Survey System</a> 
@@ -58,11 +64,29 @@
                                 <?php echo $survey['author']; ?> 
                             </td>        
                             <td class="action">
-                                <form action="take_survey.php" method="get">
-                                    <input type="submit" value="Take" name="action" class="btn btn-secondary" />             
-                                    <input type="hidden" name="survey_id" value="<?php echo $survey['id'] ?>" />
-                                </form> 
-                            </td>                                              
+                                <!-- Display an 'X' button to delete a survey if it was created by the user -->
+                                <?php if(in_array($survey['id'], $_SESSION['created_surveys'])): ?>
+                                    <form action="delete_survey.php" method="post">
+                                        <input type="submit" value="X" name="action" class="btn btn-secondary" onclick="return confirm('Are you sure you want to delete <?php echo $survey['name'] ?>?')" />
+                                        <input type="hidden" name="survey_id" value="<?php echo $survey['id'] ?>" />
+                                    </form>
+                                <?php endif; ?>
+                            </td>
+                            <td class="action">
+                                <!-- Show 'Results' button if survey has been taken already or was created by the user -->
+                                <?php if(in_array($survey['id'], $_SESSION['completed_surveys'])): ?>
+                                    <form action="view_results.php" method="get">
+                                        <input type="submit" value="Results" name="action" class="btn btn-secondary" />             
+                                        <input type="hidden" name="survey_id" value="<?php echo $survey['id'] ?>" />
+                                    </form>
+                                <!-- Show 'Take' button if survey has not been taken -->
+                                <?php else: ?>
+                                    <form action="take_survey.php" method="get">
+                                        <input type="submit" value="Take" name="action" class="btn btn-secondary" />             
+                                        <input type="hidden" name="survey_id" value="<?php echo $survey['id'] ?>" />
+                                    </form>
+                                <?php endif; ?>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                     
